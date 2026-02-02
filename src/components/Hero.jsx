@@ -68,14 +68,7 @@ const Hero = () => {
 
                     {/* Text Content */}
                     <div className="flex-1 text-center lg:text-left">
-                        <motion.span
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5 }}
-                            className="inline-block px-4 py-1 rounded-full bg-white border border-blue-100 text-[#155EEF] font-bold mb-6 text-sm tracking-wider shadow-sm"
-                        >
-                            DIGITAL MARKETING AEGIS
-                        </motion.span>
+
 
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}

@@ -23,15 +23,18 @@ const Navbar = () => {
     const isHome = location.pathname === '/';
 
     return (
-        <nav className={`fixed w-full z-50 transition-all duration-300 bg-[rgb(23,24,131)] shadow-md py-4 rounded-3xl`}>
+        <nav className={`fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 transition-all duration-300 bg-[rgb(23,24,131)] shadow-md py-4 rounded-3xl`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
                     <div className="flex-shrink-0 flex items-center">
                         <Link to="/" className="flex items-center gap-2 relative">
                             <img src="/new_logo.png" alt="DigiGro Logo" className="absolute -top-[20px] h-32 w-auto max-w-none transition-transform duration-300 hover:scale-105" />
-                            <span className="font-heading font-bold text-2xl text-white ml-32">
+                            <span className="font-heading font-bold text-2xl text-white ml-28">
                                 DigiGro
+                            </span>
+                            <span className="absolute left-24 top-20 whitespace-nowrap px-4 py-1.5 rounded-full bg-gradient-to-r from-[#155EEF] to-[#16A34A] text-white text-xs font-bold tracking-wider uppercase shadow-lg transform hover:scale-105 transition-transform duration-300 hidden sm:block">
+                                Digital Marketing Aegis
                             </span>
                         </Link>
                     </div>
