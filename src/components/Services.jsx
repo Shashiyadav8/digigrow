@@ -97,11 +97,13 @@ const Services = ({ isHome = false }) => {
                         <div className="flex flex-col lg:flex-row items-center gap-16">
                             <div className="flex-1 relative">
                                 <div className="absolute -top-10 -left-10 w-40 h-40 bg-green-100/50 rounded-full blur-3xl"></div>
-                                <img
-                                    src="https://img.freepik.com/free-vector/gradient-ui-ux-elements-background_23-2149056159.jpg"
-                                    alt="Why Choose DigiGro"
-                                    className="w-full relative z-10 rounded-2xl shadow-2xl hover:scale-[1.02] transition-transform duration-500"
-                                />
+                                <div className="relative z-10 rounded-2xl shadow-xl overflow-hidden bg-[#242b3e]">
+                                    <img
+                                        src="/digital-marketing-tools.jpg"
+                                        alt="Why Choose DigiGro"
+                                        className="w-full h-auto transform -rotate-[12deg] scale-125 origin-center pt-8"
+                                    />
+                                </div>
                             </div>
                             <div className="flex-1">
                                 <span className="text-[#16A34A] font-bold tracking-wider uppercase text-sm mb-2 block">Why Choose Us</span>

@@ -8,34 +8,59 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
     const location = useLocation();
 
     useEffect(() => {
+        let lastScrollY = window.scrollY;
+
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
+            const currentScrollY = window.scrollY;
+            setScrolled(currentScrollY > 50);
+
+            // Check if at the bottom of the page
+            const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 50;
+
+            if (currentScrollY < lastScrollY || currentScrollY <= 50 || isAtBottom) {
+                // Scrolling up, at top, or at bottom
+                setIsVisible(true);
+            } else if (currentScrollY > lastScrollY && currentScrollY > 50) {
+                // Scrolling down
+                setIsVisible(false);
+                setDropdownOpen(false); // Close dropdowns on scroll down
+                setIsOpen(false);
+            }
+
+            lastScrollY = currentScrollY;
         };
-        window.addEventListener('scroll', handleScroll);
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const isHome = location.pathname === '/';
 
     return (
-        <nav className={`fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 transition-all duration-300 bg-[rgb(23,24,131)] shadow-md py-4 rounded-3xl`}>
+        <nav className={`fixed z-50 transition-all duration-500 bg-[rgb(23,24,131)] shadow-md py-4 left-0 w-full translate-x-0 rounded-none md:left-1/2 md:-translate-x-1/2 md:w-[95%] md:max-w-7xl md:rounded-3xl ${isVisible ? 'top-0 md:top-4' : '-top-[150px]'}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
                     <div className="flex-shrink-0 flex items-center">
                         <Link to="/" className="flex items-center gap-2 relative">
-                            <img src="/new_logo.png" alt="DigiGro Logo" className="absolute -top-[20px] h-32 w-auto max-w-none transition-transform duration-300 hover:scale-105" />
-                            <span className="font-heading font-bold text-2xl text-white ml-28">
-                                DigiGro
-                            </span>
-                            <span className="absolute left-24 top-20 whitespace-nowrap px-4 py-1.5 rounded-full bg-gradient-to-r from-[#155EEF] to-[#16A34A] text-white text-xs font-bold tracking-wider uppercase shadow-lg transform hover:scale-105 transition-transform duration-300 hidden sm:block">
-                                Digital Marketing Aegis
-                            </span>
+                            <img src="/new_logo.png" alt="DigiGro Logo" className="h-10 w-auto md:absolute md:-top-[20px] md:h-32 md:max-w-none transition-transform duration-300 hover:scale-105" />
+                            <div className="flex flex-col justify-center items-center ml-0 md:ml-28">
+                                <span className="font-heading font-bold text-2xl text-white leading-none">
+                                    DigiGro
+                                </span>
+                                <span className="hidden sm:inline-block mt-2 px-3 py-1 rounded-full bg-gradient-to-r from-[#155EEF] to-[#16A34A] text-white text-xs font-bold tracking-wider uppercase shadow-lg transform hover:scale-105 transition-transform duration-300 w-fit">
+                                    Digital Marketing Aegis
+                                </span>
+                                <span className="hidden sm:inline-block mt-1 text-white text-xs font-medium tracking-wide">
+                                    A Unit of Octacrest Pvt
+                                </span>
+                            </div>
                         </Link>
                     </div>
 
@@ -91,7 +116,7 @@ const Navbar = () => {
                         </Link>
 
                         <a
-                            href="https://wa.me/919492117897"
+                            href="https://wa.me/917075782798"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="px-6 py-2 rounded-full bg-[rgb(236,2,125)] text-white font-heading font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 ml-4"

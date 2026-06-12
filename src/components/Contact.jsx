@@ -26,20 +26,12 @@ const Contact = ({ isHome = false }) => {
         }
     };
 
-    const contactCards = [
-        {
-            title: "Canada Presence",
-            address: "Vancouver, Canada",
-            phone: "+1 757 656 7778",
-            email: "helix@helixsynergycorp.org"
-        },
-        {
-            title: "India Presence",
-            address: "Mahaveer Radiance, 1st floor; Madhapur, Road No. 36, Jubilee Hills, Telangana 500081",
-            phone: "+91 94921 17897",
-            email: "hello@helixsynergycorp.org"
-        }
-    ];
+    const contactCard = {
+        title: "India Presence",
+        address: "Mahaveer Radiance, metro station, near madhapur, CBI Colony, Madhapur, Hyderabad, Telangana 500081",
+        phone: "+91 7075 782 798",
+        email: "hello@digigro.online"
+    };
 
     return (
         <div className="w-full bg-[#EFF6FF]">
@@ -59,30 +51,58 @@ const Contact = ({ isHome = false }) => {
                     </div>
                 )}
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    {contactCards.map((card, index) => (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
+                    {/* Left Side: Beautiful Location Image */}
+                    <div className="relative group overflow-hidden rounded-3xl shadow-2xl h-[500px] w-full hidden md:block">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
+                        <img
+                            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80"
+                            alt="Modern Corporate Office"
+                            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                        />
+                        <div className="absolute bottom-6 left-8 z-20 text-white">
+                            <h4 className="text-2xl font-bold font-heading mb-1 shadow-sm">Hyderabad HQ</h4>
+                            <p className="text-white/80 font-medium tracking-wide">Global Digital Growth Hub</p>
+                        </div>
+                    </div>
+
+                    {/* Right Side: Contact Card */}
+                    <div className="w-full mx-auto">
                         <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0, x: 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="bg-white p-8 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] transition-all duration-300 transform hover:-translate-y-1 text-center border border-gray-100 group"
+                            transition={{ delay: 0.1 }}
+                            className="bg-white p-10 sm:p-12 rounded-3xl shadow-[0_15px_50px_rgba(0,0,0,0.06)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.12)] transition-all duration-500 transform text-center border-2 border-transparent hover:border-[#16A34A]/20 group relative overflow-hidden h-full flex flex-col justify-center"
                         >
-                            <div className="w-16 h-16 mx-auto bg-blue-50 rounded-full flex items-center justify-center text-[#155EEF] mb-6 group-hover:bg-[#155EEF] group-hover:text-white transition-colors duration-300">
-                                {index === 0 && <span className="text-2xl">📍</span>}
-                                {index === 1 && <span className="text-2xl">🏢</span>}
+                            {/* Decorative Background Element */}
+                            <div className="absolute -top-24 -right-24 w-48 h-48 bg-blue-50/50 rounded-full blur-3xl group-hover:bg-green-50 duration-500 transition-colors"></div>
+
+                            <div className="w-20 h-20 mx-auto bg-gradient-to-br from-blue-50 to-[#EFF6FF] rounded-2xl flex items-center justify-center text-[#155EEF] mb-8 group-hover:from-[#16A34A] group-hover:to-green-400 group-hover:text-white transition-all duration-500 shadow-sm relative z-10">
+                                <span className="text-3xl">🏢</span>
                             </div>
-                            <h3 className="text-xl font-bold font-heading text-gray-900 mb-4">{card.title}</h3>
-                            <p className="text-gray-500 text-sm leading-relaxed mb-6 min-h-[40px]">
-                                {card.address}
-                            </p>
-                            <div className="space-y-2 border-t border-gray-100 pt-6">
-                                <p className="font-bold text-gray-800 hover:text-[#155EEF] transition-colors">{card.phone}</p>
-                                <a href={`mailto:${card.email}`} className="block text-[#16A34A] font-medium hover:underline">{card.email}</a>
+
+                            <h3 className="text-3xl font-bold font-heading text-gray-900 mb-6 relative z-10">{contactCard.title}</h3>
+
+                            <div className="w-full mx-auto relative z-10">
+                                <p className="text-gray-600 text-[16px] leading-relaxed mb-10 flex flex-col sm:flex-row items-center sm:items-start justify-center gap-3">
+                                    <span className="sm:mt-1 text-gray-400">📍</span>
+                                    <span>Mahaveer Radiance, Near Madhapur metro station, CBI Colony, Hyderabad, Telangana 500081</span>
+                                </p>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-gray-100 pt-8">
+                                    <div className="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-xl group-hover:bg-white border border-transparent group-hover:border-gray-50 transition-colors">
+                                        <span className="text-gray-400 text-xs mb-1 uppercase tracking-widest font-bold">Phone</span>
+                                        <p className="font-bold text-gray-800 text-lg hover:text-[#155EEF] transition-colors">{contactCard.phone}</p>
+                                    </div>
+                                    <div className="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-xl group-hover:bg-white border border-transparent group-hover:border-gray-50 transition-colors relative overflow-hidden w-full">
+                                        <span className="text-gray-400 text-xs mb-1 uppercase tracking-widest font-bold">Email</span>
+                                        <a href={`mailto:${contactCard.email}`} className="block text-[#16A34A] font-medium hover:text-[#138a3e] duration-300 w-[180px] sm:w-[150px] md:w-[180px] truncate" title={contactCard.email}>{contactCard.email}</a>
+                                    </div>
+                                </div>
                             </div>
                         </motion.div>
-                    ))}
+                    </div>
                 </div>
 
                 {isHome && (
@@ -214,7 +234,7 @@ const Contact = ({ isHome = false }) => {
                                             </div>
                                             <div>
                                                 <p className="font-semibold text-white">Call Us</p>
-                                                <p className="text-blue-200 text-sm">+91 94921 17897</p>
+                                                <p className="text-blue-200 text-sm">+91 70757 82798</p>
                                             </div>
                                         </div>
                                         <div className="flex items-start gap-4">
@@ -223,7 +243,7 @@ const Contact = ({ isHome = false }) => {
                                             </div>
                                             <div>
                                                 <p className="font-semibold text-white">Email Us</p>
-                                                <p className="text-blue-200 text-sm">contact@digigro.com</p>
+                                                <p className="text-blue-200 text-sm">hello@digigro.online</p>
                                             </div>
                                         </div>
                                     </div>

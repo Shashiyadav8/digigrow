@@ -1,12 +1,37 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Linkedin, Youtube, Send, Instagram, MessageCircle } from 'lucide-react';
+import { Facebook, Linkedin, Youtube, Send, Instagram, MessageCircle, Users } from 'lucide-react';
 
 import { services } from '../constants/services';
 
 const Footer = () => {
-    const [showAllServices, setShowAllServices] = React.useState(false);
+    const [showAllServices, setShowAllServices] = useState(false);
+    const [visitorCount, setVisitorCount] = useState(1000);
+
+    useEffect(() => {
+        const fetchVisitorCount = async () => {
+            try {
+                const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+                const shouldIncrement = !sessionStorage.getItem('hasVisited');
+                
+                const response = await fetch(`${apiUrl}/visitors${shouldIncrement ? '?increment=true' : ''}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.count) {
+                        setVisitorCount(data.count);
+                        if (shouldIncrement) {
+                            sessionStorage.setItem('hasVisited', 'true');
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to fetch visitor count:', error);
+            }
+        };
+
+        fetchVisitorCount();
+    }, []);
 
     return (
         <footer className="bg-[rgb(115,32,158)] text-white pt-20 pb-10">
@@ -75,59 +100,77 @@ const Footer = () => {
                         <h3 className="font-heading text-xl font-semibold mb-6 border-b-2 border-accent inline-block pb-2">Contact Us</h3>
                         <ul className="space-y-4 font-body text-gray-400">
                             <li className="flex gap-3">
-                                <span className="text-accent">📍</span>
-                                <span>Mahaveer Radiance, 1st floor; Madhapur, Road No. 36, Jubilee Hills, Telangana 500081</span>
+                                <span className="text-accent mt-1">📍</span>
+                                <span className="leading-relaxed">Mahaveer Radiance, Near Madhapur metro station, CBI Colony, Hyderabad, Telangana 500081</span>
                             </li>
                             <li className="flex gap-3">
                                 <span className="text-accent">✉️</span>
-                                <a href="mailto:contact@digigro.com" className="hover:text-white">contact@digigro.com</a>
+                                <a href="mailto:hello@digigro.online" className="hover:text-white">hello@digigro.online</a>
                             </li>
                             <li className="flex gap-3">
                                 <span className="text-accent">📞</span>
-                                <a href="tel:+919492117897" className="hover:text-white">+91 94921 17897</a>
+                                <a href="tel:+917075782798" className="hover:text-white">+91 7075 782 798</a>
                             </li>
                         </ul>
                     </div>
 
-                    {/* Newsletter */}
+                    {/* Business Hours */}
                     <div>
-                        <h3 className="font-heading text-xl font-semibold mb-6 border-b-2 border-accent inline-block pb-2">Newsletter</h3>
-                        <p className="text-gray-400 font-body mb-4">Subscribe for the latest updates and digital growth strategies.</p>
-                        <form className="relative">
-                            <input
-                                type="email"
-                                placeholder="Your Email"
-                                className="w-full bg-white/10 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-accent"
-                            />
-                            <button
-                                type="submit"
-                                className="absolute right-1 top-1 bg-[#16A34A] text-white p-2 rounded-md hover:shadow-lg transition-all"
-                            >
-                                <Send size={18} />
-                            </button>
-                        </form>
+                        <h3 className="font-heading text-xl font-semibold mb-6 border-b-2 border-accent inline-block pb-2">Business Hours</h3>
+                        <p className="text-gray-400 font-body mb-4">Dedicated to driving your global conference growth around the clock.</p>
+                        <ul className="space-y-3 font-body text-gray-400 text-sm">
+                            <li className="flex justify-between border-b border-white/10 pb-3 items-start">
+                                <div className="flex flex-col">
+                                    <span>Monday -</span>
+                                    <span>Friday:</span>
+                                </div>
+                                <div className="flex flex-col items-end text-right text-accent font-semibold">
+                                    <span>10:00 AM -</span>
+                                    <span>7:00 PM</span>
+                                </div>
+                            </li>
+
+                            <li className="flex justify-between pb-2 text-accent font-semibold flex-col gap-2">
+                                <span className="text-gray-300 font-normal">Saturday and Sunday the office will be closed and support will be available.</span>
+                            </li>
+                        </ul>
+                        
+                        {/* Visitor Count */}
+                        <div className="mt-6 p-4 bg-white/5 rounded-xl border border-white/10 flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-accent">
+                                    <Users size={20} />
+                                </div>
+                                <span className="font-heading font-medium">Total Visitors</span>
+                            </div>
+                            <span className="text-2xl font-bold font-heading text-accent tracking-wider">
+                                {visitorCount.toLocaleString()}
+                            </span>
+                        </div>
                     </div>
 
                 </div>
 
                 {/* Social Media Icons */}
                 <div className="flex justify-center gap-4 mt-12 mb-8">
-                    <a href="https://www.facebook.com/profile.php?id=61582994789463" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent transition-colors text-white">
+                    <a href="https://www.facebook.com/profile.php?id=61582994789463" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#16A34A] flex items-center justify-center hover:bg-purple-800 transition-colors text-white">
                         <Facebook size={18} />
                     </a>
-                    <a href="https://x.com/digigro56062" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent transition-colors text-white">
-                        <Twitter size={18} />
+                    <a href="https://x.com/digigro56062" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#16A34A] flex items-center justify-center hover:bg-purple-800 transition-colors text-white">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" className="w-4 h-4 fill-current">
+                            <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path>
+                        </svg>
                     </a>
-                    <a href="https://www.instagram.com/digigro_09/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent transition-colors text-white">
+                    <a href="https://www.instagram.com/digigro_09/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#16A34A] flex items-center justify-center hover:bg-purple-800 transition-colors text-white">
                         <Instagram size={18} />
                     </a>
-                    <a href="https://www.linkedin.com/in/digi-gro-0b8936390/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent transition-colors text-white">
+                    <a href="https://www.linkedin.com/in/digi-gro-0b8936390/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#16A34A] flex items-center justify-center hover:bg-purple-800 transition-colors text-white">
                         <Linkedin size={18} />
                     </a>
-                    <a href="https://www.youtube.com/channel/UCzPez16R4fY5NY__7xYNcZQ" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent transition-colors text-white">
+                    <a href="https://www.youtube.com/channel/UCzPez16R4fY5NY__7xYNcZQ" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#16A34A] flex items-center justify-center hover:bg-purple-800 transition-colors text-white">
                         <Youtube size={18} />
                     </a>
-                    <a href="https://www.reddit.com/user/Digigro_09/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent transition-colors text-white">
+                    <a href="https://www.reddit.com/user/Digigro_09/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#16A34A] flex items-center justify-center hover:bg-purple-800 transition-colors text-white">
                         <MessageCircle size={18} />
                     </a>
                 </div>

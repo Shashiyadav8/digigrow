@@ -74,7 +74,7 @@ const Hero = () => {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
-                            className="text-4xl sm:text-5xl lg:text-7xl font-bold font-heading leading-tight mb-6 text-dark"
+                            className="text-3xl sm:text-5xl lg:text-7xl font-bold font-heading leading-tight mb-6 text-dark"
                         >
                             A Strategic Shield for <br />
                             <span className="text-[#16A34A]">

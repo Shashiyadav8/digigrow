@@ -29,7 +29,7 @@ const CollaborationPage = () => {
                 ...formData,
                 subject: `COLLABORATION: ${formData.type} - ${formData.organization}`
             };
-            await axios.post(`${apiUrl}/contact`, payload);
+            await axios.post(`${apiUrl}/collaborate`, payload);
             setStatus('success');
             setFormData({ name: '', email: '', phone: '', organization: '', type: 'Event Partnership', message: '' });
         } catch (error) {

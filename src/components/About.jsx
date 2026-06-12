@@ -79,9 +79,9 @@ const About = ({ isHome = false }) => {
             )}
 
             {/* SECTION 2: Who We Are (Split Layout) */}
-            <section className="py-20 bg-white">
+            <section className="py-20 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex flex-col lg:flex-row items-center gap-16">
+                    <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
                         {/* Text Side */}
                         <motion.div
                             initial="hidden"
