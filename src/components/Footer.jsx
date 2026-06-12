@@ -14,12 +14,19 @@ const Footer = () => {
             try {
                 const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
                 
-                // Always increment to show the count increasing on every page load
-                const response = await fetch(`${apiUrl}/visitors?increment=true`);
+                // For perfectly accurate unique visitors, only increment if they haven't visited before.
+                // We use localStorage so it persists even if they close and reopen the tab.
+                const hasVisited = localStorage.getItem('hasVisited');
+                const shouldIncrement = !hasVisited;
+                
+                const response = await fetch(`${apiUrl}/visitors${shouldIncrement ? '?increment=true' : ''}`);
                 if (response.ok) {
                     const data = await response.json();
                     if (data.count) {
                         setVisitorCount(data.count);
+                        if (shouldIncrement) {
+                            localStorage.setItem('hasVisited', 'true');
+                        }
                     }
                 }
             } catch (error) {
