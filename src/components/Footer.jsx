@@ -13,16 +13,13 @@ const Footer = () => {
         const fetchVisitorCount = async () => {
             try {
                 const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
-                const shouldIncrement = !sessionStorage.getItem('hasVisited');
                 
-                const response = await fetch(`${apiUrl}/visitors${shouldIncrement ? '?increment=true' : ''}`);
+                // Always increment to show the count increasing on every page load
+                const response = await fetch(`${apiUrl}/visitors?increment=true`);
                 if (response.ok) {
                     const data = await response.json();
                     if (data.count) {
                         setVisitorCount(data.count);
-                        if (shouldIncrement) {
-                            sessionStorage.setItem('hasVisited', 'true');
-                        }
                     }
                 }
             } catch (error) {
