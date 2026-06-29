@@ -11,7 +11,7 @@ const Services = ({ isHome = false }) => {
                     {/* Background Image */}
                     <div
                         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-                        style={{ backgroundImage: "url('/about-2.png')" }}
+                        style={{ backgroundImage: "url('/about-2.webp')" }}
                     >
                         <div className="absolute inset-0 bg-[#1e293b]/70 mix-blend-multiply"></div>
                     </div>
@@ -99,8 +99,9 @@ const Services = ({ isHome = false }) => {
                                 <div className="absolute -top-10 -left-10 w-40 h-40 bg-green-100/50 rounded-full blur-3xl"></div>
                                 <div className="relative z-10 rounded-2xl shadow-xl overflow-hidden bg-[#242b3e]">
                                     <img
-                                        src="/digital-marketing-tools.jpg"
+                                        src="/digital-marketing-tools.webp"
                                         alt="Why Choose DigiGro"
+                                        loading="lazy"
                                         className="w-full h-auto transform -rotate-[12deg] scale-125 origin-center pt-8"
                                     />
                                 </div>

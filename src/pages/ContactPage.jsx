@@ -3,10 +3,16 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import ContactComponent from '../components/Contact';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 
 const ContactPage = () => {
     return (
-        <div className="font-sans antialiased text-gray-900 bg-white">
+        <main className="font-sans antialiased text-gray-900 bg-white overflow-x-hidden">
+            <SEO 
+                title="Contact Us - Get a Free Strategy" 
+                description="Get in touch with DigiGro for a free digital marketing strategy consultation. We are ready to help your business grow globally." 
+                keywords="Contact DigiGro, Digital Marketing Strategy, Hire Digital Marketing Agency" 
+            />
             <Navbar />
 
             {/* Page Header */}
@@ -15,7 +21,7 @@ const ContactPage = () => {
                 {/* Background Image */}
                 <div
                     className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: "url('/hero-visual.png')" }}
+                    style={{ backgroundImage: "url('/hero-visual.webp')" }}
                 >
                     <div className="absolute inset-0 bg-[#1e293b]/70 mix-blend-multiply"></div>
                 </div>
@@ -33,7 +39,7 @@ const ContactPage = () => {
             <ContactComponent />
 
             <Footer />
-        </div>
+        </main>
     );
 };
 

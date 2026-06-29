@@ -118,8 +118,9 @@ const Hero = () => {
                             >
                                 <div className="relative rounded-2xl shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-300 group bg-white border border-gray-50 p-4">
                                     <img
-                                        src="/digital-marketing-wheel.png"
+                                        src="/digital-marketing-wheel.webp"
                                         alt="Digital Marketing Aegis"
+                                        fetchPriority="high"
                                         className="w-full h-auto max-w-md mx-auto block rounded-xl"
                                     />
                                 </div>

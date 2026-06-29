@@ -58,6 +58,7 @@ const Contact = ({ isHome = false }) => {
                         <img
                             src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80"
                             alt="Modern Corporate Office"
+                            loading="lazy"
                             className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                         />
                         <div className="absolute bottom-6 left-8 z-20 text-white">
@@ -219,7 +220,7 @@ const Contact = ({ isHome = false }) => {
 
                             {/* Info Side (Desktop only visual) */}
                             <div className="hidden lg:block w-1/3 bg-[#0F172A] relative overflow-hidden p-12 text-white">
-                                <div className="absolute inset-0 opacity-20 bg-[url('/digital-marketing-wheel.png')] bg-cover bg-center"></div>
+                                <div className="absolute inset-0 opacity-20 bg-[url('/digital-marketing-wheel.webp')] bg-cover bg-center"></div>
                                 <div className="relative z-10 h-full flex flex-col justify-between">
                                     <div>
                                         <h4 className="text-2xl font-bold font-heading mb-6">Let's build something great together.</h4>

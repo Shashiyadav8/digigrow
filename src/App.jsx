@@ -1,15 +1,17 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Home from './pages/Home';
-import AboutPage from './pages/AboutPage';
-import ServicesPage from './pages/ServicesPage';
-import ContactPage from './pages/ContactPage';
-import CollaborationPage from './pages/CollaborationPage';
-import AboutFeaturePage from './pages/AboutFeaturePage';
-import ServiceDetailPage from './pages/ServiceDetailPage';
+import { HelmetProvider } from 'react-helmet-async';
 import Loader from './components/Loader';
 import ScrollToTopButton from './components/ScrollToTopButton';
+
+// Lazy loading pages
+const Home = lazy(() => import('./pages/Home'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ServicesPage = lazy(() => import('./pages/ServicesPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const CollaborationPage = lazy(() => import('./pages/CollaborationPage'));
+const AboutFeaturePage = lazy(() => import('./pages/AboutFeaturePage'));
+const ServiceDetailPage = lazy(() => import('./pages/ServiceDetailPage'));
 
 const AppContent = () => {
   const location = useLocation();
@@ -33,15 +35,17 @@ const AppContent = () => {
   return (
     <>
       {loading && <Loader />}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/about/:featureId" element={<AboutFeaturePage />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/services/:id" element={<ServiceDetailPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/collaboration" element={<CollaborationPage />} />
-      </Routes>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/about/:featureId" element={<AboutFeaturePage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/services/:id" element={<ServiceDetailPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/collaboration" element={<CollaborationPage />} />
+        </Routes>
+      </Suspense>
       <ScrollToTopButton />
     </>
   );
@@ -49,9 +53,11 @@ const AppContent = () => {
 
 function App() {
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </HelmetProvider>
   );
 }
 

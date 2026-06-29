@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Shield, Globe, TrendingUp, Users, Mail, Handshake, BarChart, RefreshCw, CheckCircle, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 
 // This data matches the "Digital Marketing Aegis" content provided
 import { services } from '../constants/services';
@@ -15,12 +16,13 @@ const ServiceDetailPage = () => {
 
     if (!service) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
+            <main className="min-h-screen flex items-center justify-center overflow-x-hidden">
+                <SEO title="Service Not Found" description="The requested service does not exist." />
                 <div className="text-center">
                     <h2 className="text-2xl font-bold mb-4">Service Not Found</h2>
                     <Link to="/services" className="text-primary hover:underline">Back to Services</Link>
                 </div>
-            </div>
+            </main>
         );
     }
 
@@ -39,7 +41,12 @@ const ServiceDetailPage = () => {
     } = service;
 
     return (
-        <div className="font-sans antialiased text-gray-900 bg-white">
+        <main className="font-sans antialiased text-gray-900 bg-white overflow-x-hidden">
+            <SEO 
+                title={`${title} - Digital Marketing Services`} 
+                description={service.shortDesc || `Professional ${title} services by DigiGro.`} 
+                keywords={`${title}, DigiGro Services, Digital Marketing`} 
+            />
             <Navbar />
 
             <motion.div
@@ -202,7 +209,7 @@ const ServiceDetailPage = () => {
                 </section>
             </motion.div>
             <Footer />
-        </div>
+        </main>
     );
 };
 

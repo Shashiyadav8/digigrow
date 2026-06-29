@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 
 const CollaborationPage = () => {
     const [formData, setFormData] = useState({
@@ -39,7 +40,12 @@ const CollaborationPage = () => {
     };
 
     return (
-        <div className="font-sans antialiased text-gray-900 bg-white">
+        <main className="font-sans antialiased text-gray-900 bg-white overflow-x-hidden">
+            <SEO 
+                title="Partner With Us - Collaboration" 
+                description="Collaborate with DigiGro for event partnerships, sponsorships, content collaboration, and strategic alliances to scale your digital reach." 
+                keywords="Digital Marketing Partnership, Sponsor Events, Content Collaboration, Strategic Alliance" 
+            />
             <Navbar />
 
             {/* Page Header */}
@@ -162,7 +168,7 @@ const CollaborationPage = () => {
             </section>
 
             <Footer />
-        </div>
+        </main>
     );
 };
 

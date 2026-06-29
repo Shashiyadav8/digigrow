@@ -13,7 +13,7 @@ const Loader = () => {
 
                 {/* Logo in Center */}
                 <img
-                    src="/logo.png"
+                    src="/logo.webp"
                     alt="Loading..."
                     className="w-20 h-auto relative z-10 animate-pulse"
                 />

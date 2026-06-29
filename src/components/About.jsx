@@ -152,7 +152,7 @@ const About = ({ isHome = false }) => {
                             viewport={{ once: true }}
                             className="flex-1 relative"
                         >
-                            <img src="/about-1.png" alt="Office Team" className="rounded-2xl shadow-2xl relative z-10 w-full object-cover h-[500px]" />
+                            <img src="/about-1.webp" alt="Office Team" loading="lazy" className="rounded-2xl shadow-2xl relative z-10 w-full object-cover h-[500px]" />
                             {/* Decorative element */}
                             <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[#16A34A]/20 rounded-full blur-2xl z-0"></div>
                         </motion.div>
@@ -171,7 +171,7 @@ const About = ({ isHome = false }) => {
             {/* SECTION 3: Counters / Stats with Background */}
             {!isHome && (
                 <section className="py-24 relative bg-[#155EEF] text-white overflow-hidden">
-                    <div className="absolute inset-0 bg-[url('/bg-pattern.png')] bg-cover opacity-10"></div>
+                    <div className="absolute inset-0 bg-[url('/bg-pattern.webp')] bg-cover opacity-10"></div>
                     <div className="max-w-7xl mx-auto px-4 relative z-10">
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
                             {stats.map((stat, index) => (

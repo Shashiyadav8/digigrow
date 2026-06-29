@@ -49,7 +49,7 @@ const Navbar = () => {
                     {/* Logo */}
                     <div className="flex-shrink-0 flex items-center">
                         <Link to="/" className="flex items-center gap-2 relative">
-                            <img src="/new_logo.png" alt="DigiGro Logo" className="h-10 w-auto md:absolute md:-top-[20px] md:h-32 md:max-w-none transition-transform duration-300 hover:scale-105" />
+                            <img src="/new_logo.webp" alt="DigiGro Logo" className="h-10 w-auto md:absolute md:-top-[20px] md:h-32 md:max-w-none transition-transform duration-300 hover:scale-105" />
                             <div className="flex flex-col justify-center items-center ml-0 md:ml-28">
                                 <span className="font-heading font-bold text-2xl text-white leading-none">
                                     DigiGro

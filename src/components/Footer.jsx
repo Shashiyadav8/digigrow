@@ -10,31 +10,39 @@ const Footer = () => {
     const [visitorCount, setVisitorCount] = useState(1000);
 
     useEffect(() => {
+        let isMounted = true;
         const fetchVisitorCount = async () => {
             try {
                 const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
                 
-                // For perfectly accurate unique visitors, only increment if they haven't visited before.
-                // We use localStorage so it persists even if they close and reopen the tab.
+                // Check if they've visited
                 const hasVisited = localStorage.getItem('hasVisited');
                 const shouldIncrement = !hasVisited;
+                
+                // Set immediately to prevent race conditions (e.g., React Strict Mode double-firing)
+                if (shouldIncrement) {
+                    localStorage.setItem('hasVisited', 'true');
+                }
                 
                 const response = await fetch(`${apiUrl}/visitors${shouldIncrement ? '?increment=true' : ''}`);
                 if (response.ok) {
                     const data = await response.json();
-                    if (data.count) {
+                    if (data.count && isMounted) {
                         setVisitorCount(data.count);
-                        if (shouldIncrement) {
-                            localStorage.setItem('hasVisited', 'true');
-                        }
                     }
+                } else if (shouldIncrement) {
+                    // Revert if fetch failed so it can try again later
+                    localStorage.removeItem('hasVisited');
                 }
             } catch (error) {
                 console.error('Failed to fetch visitor count:', error);
+                // Simple revert on network error
+                localStorage.removeItem('hasVisited');
             }
         };
 
         fetchVisitorCount();
+        return () => { isMounted = false; };
     }, []);
 
     return (
@@ -45,7 +53,7 @@ const Footer = () => {
                     {/* Brand Info */}
                     <div>
                         <div className="flex items-center gap-2 mb-6">
-                            <img src="/new_logo.png" alt="DigiGro Logo" className="h-12 w-auto drop-shadow-md" />
+                            <img src="/new_logo.webp" alt="DigiGro Logo" className="h-12 w-auto drop-shadow-md" />
                             <span className="font-heading font-bold text-2xl text-white">DigiGro</span>
                         </div>
                         <p className="text-gray-400 font-body mb-6">
@@ -157,7 +165,7 @@ const Footer = () => {
 
                 {/* Social Media Icons */}
                 <div className="flex justify-center gap-4 mt-12 mb-8">
-                    <a href="https://www.facebook.com/profile.php?id=61582994789463" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#16A34A] flex items-center justify-center hover:bg-purple-800 transition-colors text-white">
+                    <a href="https://www.facebook.com/profile.php?id=61591273230597" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#16A34A] flex items-center justify-center hover:bg-purple-800 transition-colors text-white">
                         <Facebook size={18} />
                     </a>
                     <a href="https://x.com/digigro56062" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#16A34A] flex items-center justify-center hover:bg-purple-800 transition-colors text-white">
@@ -165,7 +173,7 @@ const Footer = () => {
                             <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path>
                         </svg>
                     </a>
-                    <a href="https://www.instagram.com/digigro_09/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#16A34A] flex items-center justify-center hover:bg-purple-800 transition-colors text-white">
+                    <a href="https://www.instagram.com/digigro_marketing" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#16A34A] flex items-center justify-center hover:bg-purple-800 transition-colors text-white">
                         <Instagram size={18} />
                     </a>
                     <a href="https://www.linkedin.com/in/digi-gro-0b8936390/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#16A34A] flex items-center justify-center hover:bg-purple-800 transition-colors text-white">

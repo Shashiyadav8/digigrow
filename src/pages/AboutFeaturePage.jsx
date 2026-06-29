@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { TrendingUp, Shield, Globe, CheckCircle, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 
 const featuresData = {
     "targeted-precision": {
@@ -57,19 +58,25 @@ const AboutFeaturePage = () => {
 
     if (!feature) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
+            <main className="min-h-screen flex items-center justify-center overflow-x-hidden">
+                <SEO title="Feature Not Found" description="The requested feature does not exist." />
                 <div className="text-center">
                     <h2 className="text-2xl font-bold mb-4">Feature Not Found</h2>
                     <Link to="/about" className="text-primary hover:underline">Back to About Us</Link>
                 </div>
-            </div>
+            </main>
         );
     }
 
     const { title, icon: Icon, subtitle, fullContent, benefits, headerColor } = feature;
 
     return (
-        <div className="font-sans antialiased text-gray-900 bg-white">
+        <main className="font-sans antialiased text-gray-900 bg-white overflow-x-hidden">
+            <SEO 
+                title={`${title} - DigiGro Features`} 
+                description={description} 
+                keywords={`${title}, DigiGro, Digital Marketing`} 
+            />
             <Navbar />
 
             <motion.div
@@ -166,7 +173,7 @@ const AboutFeaturePage = () => {
                 </section>
             </motion.div>
             <Footer />
-        </div>
+        </main>
     );
 };
 
